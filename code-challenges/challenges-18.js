@@ -43,7 +43,7 @@ const wordLength = (str) => {
 
 const wordLetters = (str1, str2) => {
     const map = new Map();
-
+    let ans = 0;
     for (let index = 0; index < Math.max(str1.length); index++) {
         map.set(str1[index], (map.get(str1[index]) == undefined) ? 1 : parseInt(map.get(str1[index])) + 1);
     }
@@ -51,16 +51,15 @@ const wordLetters = (str1, str2) => {
     for (let index = 0; index < Math.max(str2.length); index++) {
         map.set(str2[index], (map.get(str2[index]) == undefined) ? -1 : parseInt(map.get(str2[index])) - 1);
     }
-    let fail = false;
     map.forEach((value, key) => {
 
         if (value != 0) {
-            fail = true;
+            ans+=value;
         }
     })
-    if (fail == true)
-        return false;
-    return true;
+    if (ans>k)
+        return "No";
+    return "Yes";
 }
 // -------------------------------------------------------------------------------------------------------
 
@@ -85,7 +84,7 @@ const wordLetters = (str1, str2) => {
 
 const targetIndex = (array, int) => {
 
-   
+
     if (int < array[0]) {
         return -1;
     }
@@ -93,7 +92,7 @@ const targetIndex = (array, int) => {
     for (let index = 0; index < array.length; index++) {
 
         if (int < array[index]) {
-            return index ;
+            return index;
         }
 
         if (int == array[index]) {
