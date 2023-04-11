@@ -1,0 +1,67 @@
+{
+    "cells": [
+        {
+            "language": "markdown",
+            "source": [
+                "## Hacker Rank\n\nFor Thursdays you will be solving some selected challenges on HackerRank, please create an account if you don't have then\nFollow the links below:\nread them carefully and solve them then copy-paste your solution below in Code Block"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### **Required**:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#####  [Append And Delete](https://www.hackerrank.com/challenges/append-and-delete/problem?isFullScreen=true)\n\nSolution:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "'use strict';\n\nconst fs = require('fs');\n\nprocess.stdin.resume();\nprocess.stdin.setEncoding('utf-8');\n\nlet inputString = '';\nlet currentLine = 0;\n\nprocess.stdin.on('data', function (inputStdin) {\n    inputString += inputStdin;\n});\n\nprocess.stdin.on('end', function () {\n    inputString = inputString.split('\\n');\n\n    main();\n});\n\nfunction readLine() {\n    return inputString[currentLine++];\n}\n\n/*\n * Complete the 'appendAndDelete' function below.\n *\n * The function is expected to return a STRING.\n * The function accepts following parameters:\n *  1. STRING s\n *  2. STRING t\n *  3. INTEGER k\n */\n\nfunction appendAndDelete(s, t, k) {\n    let breakPoint = -1;\n    for (let i = 0; i < Math.min(s.length, t.length); i++) {\n        if (s[i] != t[i]) {\n            breakPoint = i;\n            break;\n        }\n    }\n\n    if (breakPoint == -1 && s.length == t.length) {\n        return \"Yes\";\n    }\nif(breakPoint==-1){ breakPoint=Math.min(s.length, t.length);}\n\nif(k>=s.length+t.length)\n{return \"Yes\"}\n//   return (k -( s.length + t.length - breakPoint - breakPoint));\n    if ((k - s.length + t.length - breakPoint - breakPoint)%2==0 &&(k -( s.length + t.length - breakPoint - breakPoint))>=0) {\n        return \"Yes\";\n    }\n    return \"No\";\n}\n\nfunction main() {\n    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);\n\n    const s = readLine();\n\n    const t = readLine();\n\n    const k = parseInt(readLine().trim(), 10);\n\n    const result = appendAndDelete(s, t, k);\n\n    ws.write(result + '\\n');\n\n    ws.end();\n}\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "### **Optional**:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#####  [Encryption](https://www.hackerrank.com/challenges/encryption/problem?isFullScreen=true)\n\nSolution:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "'use strict';\n\nconst fs = require('fs');\n\nprocess.stdin.resume();\nprocess.stdin.setEncoding('utf-8');\n\nlet inputString = '';\nlet currentLine = 0;\n\nprocess.stdin.on('data', function(inputStdin) {\n    inputString += inputStdin;\n});\n\nprocess.stdin.on('end', function() {\n    inputString = inputString.split('\\n');\n\n    main();\n});\n\nfunction readLine() {\n    return inputString[currentLine++];\n}\n\n/*\n * Complete the 'encryption' function below.\n *\n * The function is expected to return a STRING.\n * The function accepts STRING s as parameter.\n */\n\nfunction encryption(s) {\n   let gridsize = Math.ceil(Math.sqrt(s.length)),hold=s,arr=[],ans=[];  \n   while(hold) {\n        arr = arr.concat(hold.substring(0, gridsize));\n        hold = hold.substring(gridsize);\n   }\n   for(let i = 0 ; i < gridsize; i++) {\n        ans = ans.concat(arr.reduce((prev,curr)=>{return prev+(curr[i]||\"\")},\"\")\n    )\n   };\n   return ans.join(' ');\n}\n// \n// \n// \n// \n// \nfunction main() {\n    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);\n\n    const s = readLine();\n\n    const ans = encryption(s);\n\n    ws.write(ans + '\\n');\n\n    ws.end();\n}\n"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "markdown",
+            "source": [
+                "#####  [The Time In Words](https://www.hackerrank.com/challenges/the-time-in-words/problem?isFullScreen=true)\n\nSolution:"
+            ],
+            "outputs": []
+        },
+        {
+            "language": "javascript",
+            "source": [
+                "'use strict';\n\nconst fs = require('fs');\n\nprocess.stdin.resume();\nprocess.stdin.setEncoding('utf-8');\n\nlet inputString = '';\nlet currentLine = 0;\n\nprocess.stdin.on('data', function (inputStdin) {\n    inputString += inputStdin;\n});\n\nprocess.stdin.on('end', function () {\n    inputString = inputString.split('\\n');\n\n    main();\n});\n\nfunction readLine() {\n    return inputString[currentLine++];\n}\n\n/*\n * Complete the 'timeInWords' function below.\n *\n * The function is expected to return a STRING.\n * The function accepts following parameters:\n *  1. INTEGER h\n *  2. INTEGER m\n */\n\nfunction timeInWords(h, m) {\n    let nums = [\" o' clock\", 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',\n        'eleven', 'twelve', 'thirteen', 'fourteen', 'quarter', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty',\n        'twenty one', 'twenty two', 'twenty three', 'twenty four', 'twenty five', 'twenty six', 'twenty seven', 'twenty eight', 'twenty nine', \"half\"\n    ];\n\nlet ans;\n\n    if (m == 0) {\n        return (nums[h] + nums[m]);\n    }\n\n    if (m <= 30) {\n        ans=(m == 30 || m == 15) ? \"\" :(m>1)? \" minutes\":\" minute\";\n        return (nums[m] + ans + \" past \" + nums[h]);\n    }\n    else {\n        ans=(m == 45) ? \"\" :(m>1)? \" minutes\":\" minute\";\n        return (nums[60-m] + ans+ \" to \" + nums[h+1]);\n    }\n}\n\nfunction main() {\n    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);\n\n    const h = parseInt(readLine().trim(), 10);\n\n    const m = parseInt(readLine().trim(), 10);\n\n    const result = timeInWords(h, m);\n\n    ws.write(result + '\\n');\n\n    ws.end();\n}\n"
+            ],
+            "outputs": []
+        }
+    ]
+}
